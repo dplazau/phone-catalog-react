@@ -1,0 +1,6 @@
+export const ACTION_TYPES = {
+    FETCH_ALL: "FETCH_ALL",
+    CREATE: "CREATE",
+    DELETE: "DELETE",
+    FETCH_ONE: "FETCH_ONE",
+};
