@@ -1,11 +1,10 @@
-import { Box, Container, TextField } from "@mui/material";
+import { Box, Container, TextField, Typography } from "@mui/material";
 import { Form, Formik } from "formik";
 import { useDispatch } from "react-redux";
 import { postItemAction } from "../stores/actions/items";
 import { itemValidationSchema } from "../validations/index";
 
 const itemInfo = [
-    { label: "id", name: "id", type: "text" },
     { label: "name", name: "name", type: "text" },
     { label: "manufacturer", name: "manufacturer", type: "text" },
     { label: "description", name: "description", type: "text" },
@@ -14,13 +13,12 @@ const itemInfo = [
     { label: "imageFileName", name: "imageFileName", type: "text" },
     { label: "screen", name: "screen", type: "text" },
     { label: "processor", name: "processor", type: "text" },
-    { label: "ram", name: "ram", type: "text" },
+    { label: "ram", name: "ram", type: "number" },
     { label: "createdAt", name: "createdAt", type: "date" },
 ];
 
 export const AddItem = () => {
     const defaultValues = {
-        id: "",
         name: "",
         manufacturer: "",
         description: "",
@@ -40,58 +38,63 @@ export const AddItem = () => {
         dispatch(postItemAction(values));
     };
 
+    const onReset = () => {
+        console.log("reseting cell values");
+    };
+
     return (
-        <Container>
-            <Formik
-                initialValues={defaultValues}
-                validationSchema={itemValidationSchema}
-                onSubmit={onSubmit}
-            >
-                {(formik) => (
-                    <div>
-                        <div>
-                            <h1>Add an Item</h1>
-                        </div>
-                        <Form>
-                            <Box
-                                sx={{
-                                    flex: 1,
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    alignItems: "center",
-                                    alignContent: "center",
-                                    position: "relative",
-                                }}
-                            >
-                                {itemInfo.map((el, key) => {
-                                    return (
-                                        <TextField
-                                            label={el.label}
-                                            name={el.name}
-                                            type={el.type}
-                                            key={key}
-                                            onChange={formik.handleChange}
-                                        />
-                                    );
-                                })}
-                            </Box>
-                            <Container
-                                sx={{
-                                    flex: 1,
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    alignItems: "center",
-                                    alignContent: "center",
-                                    position: "relative",
-                                }}
-                            >
-                                <button type="submit">Register</button>
-                                <button type="reset">Reset</button>
-                            </Container>
-                        </Form>
-                    </div>
-                )}
-            </Formik>
-        </Container>
+        <Formik
+            initialValues={defaultValues}
+            validationSchema={itemValidationSchema}
+            onSubmit={onSubmit}
+            onReset={onReset}
+        >
+            {(formik) => (
+                <Container
+                    sx={{
+                        flex: 1,
+                        alignContent: "center",
+                        alignItems: "center",
+                        justifyContent: "center",
+                    }}
+                >
+                    <Typography variant="h4" sx={{ padding: 5 }}>
+                        Add an Item to the Phone Catalog
+                    </Typography>
+                    <Form>
+                        <Box
+                            sx={{
+                                flex: 1,
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "center",
+                                alignContent: "center",
+                                alignItems: "center",
+                            }}
+                        >
+                            {itemInfo.map((el, key) => {
+                                return (
+                                    <TextField
+                                        label={
+                                            el.label === "createdAt"
+                                                ? ""
+                                                : el.label
+                                        }
+                                        name={el.name}
+                                        type={el.type}
+                                        key={key}
+                                        onChange={formik.handleChange}
+                                    />
+                                );
+                            })}
+                        </Box>
+                        <Container sx={{ flexDirection: "column" }}>
+                            <button type="submit">Register</button>
+                            <button type="reset">Reset</button>
+                        </Container>
+                    </Form>
+                </Container>
+            )}
+        </Formik>
     );
 };

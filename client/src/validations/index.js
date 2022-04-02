@@ -1,7 +1,6 @@
 import * as Yup from "yup";
 
 export const itemValidationSchema = Yup.object({
-    id: Yup.string().required("Required"),
     name: Yup.string().required("Required"),
     manufacturer: Yup.string().required("Required"),
     description: Yup.string().required("Required"),
@@ -10,6 +9,6 @@ export const itemValidationSchema = Yup.object({
     imageFileName: Yup.string().required("Required"),
     screen: Yup.string().required("Required"),
     processor: Yup.string().required("Required"),
-    ram: Yup.string().required("Required"),
+    ram: Yup.number().required("Required"),
     createdAt: Yup.date(),
 });

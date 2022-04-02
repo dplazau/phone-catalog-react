@@ -13,7 +13,7 @@ const Item = ({ item }) => {
     useEffect(() => {}, [item]);
 
     const showItemInfo = () => {
-        navigate(`/items/${item.id}`, { state: item });
+        navigate(`/items/${item._id}`, { state: item });
     };
 
     return (
@@ -25,7 +25,7 @@ const Item = ({ item }) => {
                         <InfoIcon />
                     </Icon>
                 </Button>
-                <Button onClick={() => dispatch(deleteItemAction(item))}>
+                <Button onClick={() => dispatch(deleteItemAction(item._id))}>
                     <Icon>
                         <DeleteIcon />
                     </Icon>

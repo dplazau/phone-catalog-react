@@ -22,7 +22,7 @@ const Items = () => {
         <ItemsContainer>
             {items.map((item) => (
                 <Grid item key={item._id} xs={12} sm={6}>
-                    <Item item={item} key={item.id} />
+                    <Item item={item} key={item._id} />
                 </Grid>
             ))}
         </ItemsContainer>

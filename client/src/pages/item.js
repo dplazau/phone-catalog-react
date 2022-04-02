@@ -1,3 +1,4 @@
+import { Container, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -13,15 +14,23 @@ const ItemPage = () => {
     }, [dispatch, id]);
 
     return (
-        <div>
+        <Container>
             {!Item ? (
                 <p>...Loading</p>
             ) : (
-                Object.keys(Item).map((key, index) => (
-                    <p key={index}>{Item[key]}</p>
-                ))
+                Object.keys(Item).map((key, index) =>
+                    key === "imageFileName" ? (
+                        <img src={Item[key]} alt="" />
+                    ) : (
+                        <Container sx={{ flex: 1, flexDirection: "column" }}>
+                            <Typography key={index}>
+                                {key}: {Item[key]}
+                            </Typography>
+                        </Container>
+                    )
+                )
             )}
-        </div>
+        </Container>
     );
 };
 

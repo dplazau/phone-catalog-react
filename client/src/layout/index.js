@@ -1,11 +1,10 @@
-import React from "react";
-import ItemsAppBar from "./appBar";
+import ResponsiveAppBar from "./ResponsiveAppBar";
 
 const Layout = () => {
     return (
-        <div>
-            <ItemsAppBar />
-        </div>
+        <>
+            <ResponsiveAppBar />
+        </>
     );
 };
 
